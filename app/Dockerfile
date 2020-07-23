@@ -1,4 +1,4 @@
-# docker image build -f Dockerfile -t twitter_cfdspace:latest .
+# docker image build -f Dockerfile -t twitter_cfdspace_bot:latest .
 FROM python:3.8-alpine
 
 COPY config.py /bot/

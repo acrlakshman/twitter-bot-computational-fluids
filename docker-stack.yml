@@ -8,7 +8,7 @@ networks:
 services:
   app:
     # Must have a pre-build docker image.
-    image: twitter_cfdspace:latest
+    image: acrlakshman/twitter_cfdspace_bot:latest
     networks:
       - default
     environment:

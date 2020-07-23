@@ -1,0 +1,45 @@
+version: '3'
+
+networks:
+  default:
+    driver: bridge
+    internal: false
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.compose
+    image: cfdspace:latest
+    container_name: cfdspace_app
+    restart: unless-stopped
+    networks:
+      - default
+    environment:
+      # API keys and ACCESS tokens.
+      - TWITTER_API_KEY=<REPLACE_WITH_TWITTER_API_KEY>
+      - TWITTER_API_KEY_SECRET=<REPLACE_WITH_TWITTER_API_KEY_SECRET_HERE>
+      - TWITTER_ACCESS_TOKEN=<REPLACE_WITH_TWITTER_ACCESS_TOKEN_HERE>
+      - TWITTER_ACCESS_TOKEN_SECRET=<REPLACE_WITH_TWITTER_ACCESS_TOKEN_SECRET_HERE>
+      # mongodb access details. Must match with admin credentials below.
+      - MONGO_USER=<REPLACE_WITH_MONGODB_USER>
+      - MONGO_PASSWORD=<REPLACE_WITH_MONGODB_PASSWORD>
+      - MONGO_HOST=cfdspace_db
+      - MONGO_DB=cfdspace
+    volumes:
+      - './logs:/var/log'
+
+  db:
+    image: mongo:4-bionic
+    container_name: cfdspace_db
+    restart: unless-stopped
+    networks:
+      - default
+    ports:
+      - '27017:27017'
+    environment:
+      # mongodb admin credentials.
+      - MONGO_INITDB_ROOT_USERNAME=<REPLACE_WITH_MONGODB_USER>
+      - MONGO_INITDB_ROOT_PASSWORD=<REPLACE_WITH_MONGODB_PASSWORD>
+    volumes:
+      - './db:/data/db'

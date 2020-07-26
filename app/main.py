@@ -227,6 +227,7 @@ def process_pulled_tweets(tw_api, mongo_client):
 
     pulled_list_coll = db[config.MONGO_COLL_PULLED_LIST]
     posted_list_coll = db[config.MONGO_COLL_POSTED_LIST]
+    posted_list_all_coll = db[config.MONGO_COLL_POSTED_LIST_ALL]
     discard_list_coll = db[config.MONGO_COLL_DISCARD_LIST]
 
     # process all that are retweets and remove them
@@ -265,6 +266,7 @@ def process_pulled_tweets(tw_api, mongo_client):
                 inc_api_call_counters(
                     mongo_client, config.TWEET_RETWEET_ID, config.TWEET_RETWEET_LIMIT_WINDOW)
                 posted_list_coll.insert_one(doc)
+                posted_list_all_coll.insert_one(doc)
                 pulled_list_coll.delete_one({"id_str": doc["id_str"]})
             except tweepy.TweepError as e:
                 config.logger.error(

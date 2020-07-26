@@ -1,0 +1,281 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Introduction · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.5.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="get_started.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="get_started.html">
+            
+                <a href="get_started.html">
+            
+                    
+                    Get Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="deploy_app.html">
+            
+                <a href="deploy_app.html">
+            
+                    
+                    Deploy bot
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Introduction</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="twitter-bot-that-shares-computational-research">Twitter bot that shares computational research</h1>
+<p><a href="https://twitter.com/cfdspace" target="_blank">@cfdspace</a></p>
+<h3 id="hi--i-am-a-twitter-bot-and-my-goal-is-to-share-all-computational-research-at-one-place">Hi,  I am a twitter bot and my goal is to share all computational research at one place.</h3>
+<h2 id="what-do-i-do">What do I do?</h2>
+<p>I search twitter feed every few minutes for some hashtags focused on computational research and I retweet them for now.</p>
+<h2 id="can-you-make-me-do-something-else">Can you make me do something else?</h2>
+<p>Sure you can, just fork me, change some code logic or default hashtags that suits your needs and deploy it as detailed below. But, please put me only to good use.</p>
+<h2 id="can-you-tune-parameters-without-restarting-me">Can you tune parameters without restarting me?</h2>
+<p>Yes you can. Connect to mongodb and change the values in the collection <code>config</code>. Some of the things you can do right now are:</p>
+<ul>
+<li>Change number of tweets that I can search for each time I make API call</li>
+<li>Pause me by setting <code>pause_app: true</code>. I won&apos;t talk to twitter :smile:</li>
+<li>Change hashtags for which I can scan twitter to find content</li>
+</ul>
+<h2 id="want-to-know-a-little-more-on-how-i-work">Want to know a little more on how I work?</h2>
+<ul>
+<li>I scan for some tweets with predefined hashtags</li>
+<li>I store them in a database to do further processing. This avoids me to make too many API calls</li>
+<li>I scan for some metadata and post tweets that meet predefined criteria and save both posted tweets and discarded tweets</li>
+<li>Posted and discarded list are used to avoid spamming content. In future I will periodically clean these databases</li>
+<li><code>Poll vs Stream</code>: Currently I rely on polling</li>
+<li><code>Context analysis</code>: For now I can&apos;t handle this, but you can extend me to do that</li>
+</ul>
+<h2 id="what-hashtags-can-i-handle-for-now">What hashtags can I handle for now?</h2>
+<ul>
+<li><code>computationalfluiddynamics</code></li>
+<li><code>openfoam</code></li>
+</ul>
+<h1 id="ingredients-used">Ingredients used</h1>
+<ul>
+<li><a href="https://pypi.org/project/tweepy/" target="_blank">tweepy</a></li>
+<li><a href="https://pypi.org/project/pymongo/" target="_blank">pymongo</a></li>
+<li><a href="https://github.com/mongodb/mongo" target="_blank">mongodb</a></li>
+</ul>
+<h1 id="warning">Warning</h1>
+<p>This app uses a persistent database, which keeps growing and will consume disk space. For now you need to manually perform the cleanup and keep an eye on the space used by mongodb. I will update the code to automate such that app does this automatically while it is running.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="get_started.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Get Started">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Get Started","level":"1.2","depth":1,"path":"get_started.md","ref":"get_started.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2020-07-26T02:40:38.064Z","type":"markdown"},"gitbook":{"version":"3.5.2","time":"2020-07-26T02:52:39.351Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

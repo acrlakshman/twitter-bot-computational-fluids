@@ -1,0 +1,16 @@
+{
+  "name": "twitter-bot-computational-fluids",
+  "version": "0.9.0",
+  "description": "twitter bot to share computational work",
+  "main": "index.js",
+  "repository": "https://github.com/acrlakshman/twitter-bot-computational-fluids",
+  "author": "Lakshman Anumolu <anumolu@uwalumni.com>",
+  "license": "MIT",
+  "dependencies": {
+    "honkit": "3.5.2"
+  },
+  "scripts": {
+    "build": "honkit build",
+    "serve": "honkit serve"
+  }
+}

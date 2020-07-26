@@ -4,3 +4,8 @@ __pycache__
 *.log
 logs/
 db/
+
+node_modules/
+*.lock
+package-lock.json
+_book/

@@ -40,6 +40,6 @@ Yes you can. Connect to mongodb and change the values in the collection `config`
 - [pymongo](https://pypi.org/project/pymongo/)
 - [mongodb](https://github.com/mongodb/mongo)
 
-# Warning
+# Note
 
 This app uses a persistent database, which keeps growing and will consume disk space. For now you need to manually perform the cleanup and keep an eye on the space used by mongodb. I will update the code to automate such that app does this automatically while it is running.

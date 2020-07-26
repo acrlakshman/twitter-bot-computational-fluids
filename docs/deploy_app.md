@@ -52,6 +52,8 @@ Before deploying, change the default hashtags to suite your needs.
 
 * Connect to `mongodb` and edit the field `hash_tags` in the collection `config`
 
+_String `cfdspace` is used in few places in the source code (under `app/`), you may change that to your desired string or to match it with the name of your bot_
+
 ---
 
 ## Deploy bot
@@ -63,7 +65,7 @@ Before deploying, change the default hashtags to suite your needs.
 - Clone and configure the scripts
 
 ```sh
-git clone https://github.com/acrlakshman/cfdspace twitter-bot
+git clone https://github.com/acrlakshman/twitter-bot-computational-fluids twitter-bot
 cd twitter-bot
 mkdir -p logs db
 ```
@@ -95,7 +97,7 @@ docker swarm init --advertise-addr <MANAGER_NODE_IP>
 ```
 
 ```sh
-git clone https://github.com/acrlakshman/cfdspace twitter-bot
+git clone https://github.com/acrlakshman/twitter-bot-computational-fluids twitter-bot
 cd twitter-bot
 mkdir -p logs db
 ```

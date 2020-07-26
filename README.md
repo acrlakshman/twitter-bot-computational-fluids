@@ -59,7 +59,7 @@ Yes you can. Connect to mongodb and change the values in the collection `config`
 - Clone and configure the scripts
 
 ```sh
-git clone https://github.com/acrlakshman/cfdspace twitter-bot
+git clone https://github.com/acrlakshman/twitter-bot-computational-fluids twitter-bot
 cd twitter-bot
 mkdir -p logs db
 ```
@@ -91,7 +91,7 @@ docker swarm init --advertise-addr <MANAGER_NODE_IP>
 ```
 
 ```sh
-git clone https://github.com/acrlakshman/cfdspace twitter-bot
+git clone https://github.com/acrlakshman/twitter-bot-computational-fluids twitter-bot
 cd twitter-bot
 mkdir -p logs db
 ```

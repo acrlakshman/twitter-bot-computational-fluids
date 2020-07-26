@@ -1,16 +1,8 @@
 # Twitter bot that shares computational research
 
-:point_right: [@cfdspace](https://twitter.com/cfdspace)
+[@cfdspace](https://twitter.com/cfdspace)
 
-### Hi :wave: I am a twitter bot and my goal is to share all computational research at one place.
-
----
-
-### Detailed documentation
-
-:point_right: https://acrlakshman.github.io/twitter-bot-computational-fluids/
-
----
+### Hi,  I am a twitter bot and my goal is to share all computational research at one place.
 
 ## What do I do?
 
@@ -48,73 +40,6 @@ Yes you can. Connect to mongodb and change the values in the collection `config`
 - [pymongo](https://pypi.org/project/pymongo/)
 - [mongodb](https://github.com/mongodb/mongo)
 
----
-
-# How to start me?
-
-## Using docker-compose
-
-### Deploy
-
-- Clone and configure the scripts
-
-```sh
-git clone https://github.com/acrlakshman/cfdspace twitter-bot
-cd twitter-bot
-mkdir -p logs db
-```
-
-- Enter API keys and ACCESS tokens in `docker-compose.yml`
-- Enter desired credentials for mongodb admin.
-- Start containers
-
-```sh
-docker-compose up -d
-```
-
-### Stop
-
-```sh
-docker-compose down -v
-```
-
-## Using docker stack
-
-### Deploy
-
-Make sure to create swarm
-
-```sh
-docker swarm init
-# or
-docker swarm init --advertise-addr <MANAGER_NODE_IP>
-```
-
-```sh
-git clone https://github.com/acrlakshman/cfdspace twitter-bot
-cd twitter-bot
-mkdir -p logs db
-```
-
-- Enter API keys and ACCESS tokens in `docker-stack.yml`
-- Enter desired credentials for mongodb admin.
-- Start containers
-
-```sh
-docker stack deploy -c docker-stack.yml bot
-```
-
-### Stop
-
-```sh
-docker stack rm cfdspace_stack
-```
-
-## Database and logs
-
-- Database persists in the volume `db`
-- App logs are stored in `logs/cfdspace.log`
-
-### Warning
+# Warning
 
 This app uses a persistent database, which keeps growing and will consume disk space. For now you need to manually perform the cleanup and keep an eye on the space used by mongodb. I will update the code to automate such that app does this automatically while it is running.

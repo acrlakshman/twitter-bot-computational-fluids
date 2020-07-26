@@ -152,13 +152,12 @@ def process_pulled_tweets(tw_api, mongo_client):
     and save it in posted_list, else move it to discard_list.
 
     - Checks to pass to move to posted_list:
+        - tweet is not a retweeted one.
         - tweet id is not found in posted_list.
         - tweet id is not found in discard_list.
         - language code is 'en'.
         - full_text does not match with another tweet in posted_list to avoid duplicate action.
-        - tweet is not a retweeted one.
         - TODO: check the context using ML model.
-    - Add to discard_list if it is not already present.
     """
 
     db = mongo_client[config.MONGO_DB]
@@ -167,12 +166,10 @@ def process_pulled_tweets(tw_api, mongo_client):
     posted_list_coll = db[config.MONGO_COLL_POSTED_LIST]
     discard_list_coll = db[config.MONGO_COLL_DISCARD_LIST]
 
-    # process all that are retweets and push to discard_list if does not exist
+    # process all that are retweets and remove them
     pulled_list = pulled_list_coll.find(
         {"retweeted_status": {"$exists": True}})
     for doc in pulled_list:
-        if not in_the_list(mongo_client, doc, config.MongoDocLists.DISCARD_LIST):
-            discard_list_coll.insert_one(doc)
         pulled_list_coll.delete_one({"id_str": doc["id_str"]})
 
     pulled_list = pulled_list_coll.find({})
@@ -192,22 +189,11 @@ def process_pulled_tweets(tw_api, mongo_client):
             # Check the language code
             # One could use doc.metadata["iso_language_code"] == 'en'
             if not (detect(doc["full_text"]) == 'en'):
-                # Add to discard_list
-                discard_list_coll.insert_one(doc)
                 pulled_list_coll.delete_one({"id_str": doc["id_str"]})
                 continue
 
             # Check the full_text with existing documents' full_text in posted_list
             if posted_list_coll.find_one({"full_text": doc["full_text"]}):
-                # Add to discard list
-                discard_list_coll.insert_one(doc)
-                pulled_list_coll.delete_one({"id_str": doc["id_str"]})
-                continue
-
-            # Tweet should not be a retweet
-            if hasattr(doc, 'retweeted_status'):
-                # Add to discard list
-                discard_list_coll.insert_one(doc)
                 pulled_list_coll.delete_one({"id_str": doc["id_str"]})
                 continue
 

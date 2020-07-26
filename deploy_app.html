@@ -1,0 +1,342 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Deploy bot · HonKit</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 3.5.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="get_started.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="get_started.html">
+            
+                <a href="get_started.html">
+            
+                    
+                    Get Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="deploy_app.html">
+            
+                <a href="deploy_app.html">
+            
+                    
+                    Deploy bot
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Deploy bot</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="deploy-bot">Deploy bot</h1>
+<p>Bot can be run either locally or on a server. There are many blog posts that describe how to deploy twitter bot on Amazon EC2, AWS Lambda, digitalocean, etc. Some randomly selected references are included in the bottom of this page. Here I will describe how I deployed <a href="https://twitter.com/cfdspace" target="_blank">cfdspace</a> bot.</p>
+<hr>
+<h2 id="server-space">Server space</h2>
+<p>I used digitalocean server space to run a docker container for this bot.</p>
+<ul>
+<li><a href="https://m.do.co/c/c647ddbfcfd9" target="_blank">digitalocean</a><ul>
+<li>Above link includes a referral code, which when used, you will get $100 in credit over 60 days. Once you spent $25, I will get $25. Feel free to either create account using above code or create without referral.</li>
+</ul>
+</li>
+</ul>
+<p><em>Please note that, to run this bot, you need not get a new server space, you could use your local machine too, as long as you have docker installed and can make sure to restart the bot when system restarts or the like scenarios.</em></p>
+<hr>
+<h2 id="docker">Docker</h2>
+<p>Install <a href="https://www.docker.com/" target="_blank">docker</a> using one of the following links</p>
+<ul>
+<li>Linux: <a href="https://get.docker.com/" target="_blank">get.docker.com</a></li>
+<li>Mac: <a href="https://hub.docker.com/editions/community/docker-ce-desktop-mac" target="_blank">Docker Desktop for Mac</a></li>
+<li>Windows: <a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows" target="_blank">Docker Desktop for Windows</a></li>
+</ul>
+<h3 id="installation-instructions-for-docker">Installation instructions for docker</h3>
+<p>If you need detailed installation instructions for docker installation on each operating system, please go through these links</p>
+<ul>
+<li>Linux: <a href="https://youtu.be/bwHIUN9gti0?list=PL14zCGMQYkUprMVMXT-4-J1AIFYPEQmy-&amp;t=211" target="_blank">Install docker on Ubuntu</a><ul>
+<li>Time: <a href="https://youtu.be/bwHIUN9gti0?list=PL14zCGMQYkUprMVMXT-4-J1AIFYPEQmy-&amp;t=211" target="_blank">3:31</a> to <a href="https://youtu.be/bwHIUN9gti0?list=PL14zCGMQYkUprMVMXT-4-J1AIFYPEQmy-&amp;t=290" target="_blank">4:50</a></li>
+</ul>
+</li>
+<li>Mac: <a href="https://youtu.be/yWYfdam9iy4?list=PL14zCGMQYkUprMVMXT-4-J1AIFYPEQmy-&amp;t=129" target="_blank">Install docker on Mac</a><ul>
+<li>Time: <a href="https://youtu.be/yWYfdam9iy4?list=PL14zCGMQYkUprMVMXT-4-J1AIFYPEQmy-&amp;t=129" target="_blank">2.09</a> to <a href="https://youtu.be/yWYfdam9iy4?list=PL14zCGMQYkUprMVMXT-4-J1AIFYPEQmy-&amp;t=207" target="_blank">3:27</a></li>
+</ul>
+</li>
+<li>Windows: <a href="https://youtu.be/K_7wavPEtCc?list=PL14zCGMQYkUprMVMXT-4-J1AIFYPEQmy-&amp;t=112" target="_blank">Install docker on Windows</a><ul>
+<li>Time: <a href="https://youtu.be/K_7wavPEtCc?list=PL14zCGMQYkUprMVMXT-4-J1AIFYPEQmy-&amp;t=112" target="_blank">1:52</a> to <a href="https://youtu.be/K_7wavPEtCc?list=PL14zCGMQYkUprMVMXT-4-J1AIFYPEQmy-&amp;t=386" target="_blank">6:26</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="install-docker-compose-optional">Install docker-compose (optional)</h3>
+<ul>
+<li>This bot can be deployed either using <code>docker-compose</code> or <code>docker stack</code>. If you prefer to deploy using <code>docker-compose</code>, make sure to have that installed.<ul>
+<li>Installation instructions: <a href="https://docs.docker.com/compose/install/" target="_blank">https://docs.docker.com/compose/install/</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="deploy-bot">Deploy bot</h2>
+<h3 id="using-docker-compose">Using docker-compose</h3>
+<h4 id="deploy">Deploy</h4>
+<ul>
+<li>Clone and configure the scripts</li>
+</ul>
+<pre><code class="lang-sh">git <span class="hljs-built_in">clone</span> https://github.com/acrlakshman/cfdspace twitter-bot
+<span class="hljs-built_in">cd</span> twitter-bot
+mkdir -p logs db
+</code></pre>
+<ul>
+<li>Enter API keys and ACCESS tokens in <code>docker-compose.yml</code></li>
+<li>Enter desired credentials for mongodb admin.</li>
+<li>Start containers</li>
+</ul>
+<pre><code class="lang-sh">docker-compose up <span class="hljs-_">-d</span>
+</code></pre>
+<h4 id="stop">Stop</h4>
+<pre><code class="lang-sh">docker-compose down -v
+</code></pre>
+<h3 id="using-docker-stack">Using docker stack</h3>
+<h4 id="deploy">Deploy</h4>
+<p>Make sure to create swarm</p>
+<pre><code class="lang-sh">docker swarm init
+<span class="hljs-comment"># or</span>
+docker swarm init --advertise-addr &lt;MANAGER_NODE_IP&gt;
+</code></pre>
+<pre><code class="lang-sh">git <span class="hljs-built_in">clone</span> https://github.com/acrlakshman/cfdspace twitter-bot
+<span class="hljs-built_in">cd</span> twitter-bot
+mkdir -p logs db
+</code></pre>
+<ul>
+<li>Enter API keys and ACCESS tokens in <code>docker-stack.yml</code></li>
+<li>Enter desired credentials for mongodb admin.</li>
+<li>Start containers</li>
+</ul>
+<pre><code class="lang-sh">docker stack deploy -c docker-stack.yml bot
+</code></pre>
+<h4 id="stop">Stop</h4>
+<pre><code class="lang-sh">docker stack rm cfdspace_stack
+</code></pre>
+<h3 id="database-and-logs">Database and logs</h3>
+<ul>
+<li>Database persists in the volume <code>db</code></li>
+<li>App logs are stored in <code>logs/cfdspace.log</code></li>
+</ul>
+<hr>
+<p><strong>Some blog posts:</strong></p>
+<ul>
+<li><a href="https://realpython.com/twitter-bot-python-tweepy/" target="_blank">https://realpython.com/twitter-bot-python-tweepy/</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-twitterbot-with-python-3-and-the-tweepy-library" target="_blank">https://www.digitalocean.com/community/tutorials/how-to-create-a-twitterbot-with-python-3-and-the-tweepy-library</a></li>
+<li><a href="https://victoria.dev/blog/running-a-free-twitter-bot-on-aws-lambda/" target="_blank">https://victoria.dev/blog/running-a-free-twitter-bot-on-aws-lambda/</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="get_started.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Get Started">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Deploy bot","level":"1.3","depth":1,"previous":{"title":"Get Started","level":"1.2","depth":1,"path":"get_started.md","ref":"get_started.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"deploy_app.md","mtime":"2020-07-26T03:54:58.513Z","type":"markdown"},"gitbook":{"version":"3.5.2","time":"2020-07-26T03:55:08.794Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · HonKit</title>
+        <title>Get Started · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 3.5.2">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="get_started.html" />
+    <link rel="next" href="deploy_app.html" />
     
+    
+    <link rel="prev" href="./" />
     
 
     </head>
@@ -87,7 +89,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -100,7 +102,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="get_started.html">
+        <li class="chapter active" data-level="1.2" data-path="get_started.html">
             
                 <a href="get_started.html">
             
@@ -156,7 +158,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Get Started</a>
     </h1>
 </div>
 
@@ -171,42 +173,26 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="twitter-bot-that-shares-computational-research">Twitter bot that shares computational research</h1>
-<p><a href="https://twitter.com/cfdspace" target="_blank">@cfdspace</a></p>
-<h3 id="hi--i-am-a-twitter-bot-and-my-goal-is-to-share-all-computational-research-at-one-place">Hi,  I am a twitter bot and my goal is to share all computational research at one place.</h3>
-<h2 id="what-do-i-do">What do I do?</h2>
-<p>I search twitter feed every few minutes for some hashtags focused on computational research and I retweet them for now.</p>
-<h2 id="can-you-make-me-do-something-else">Can you make me do something else?</h2>
-<p>Sure you can, just fork me, change some code logic or default hashtags that suits your needs and deploy it as detailed below. But, please put me only to good use.</p>
-<h2 id="can-you-tune-parameters-without-restarting-me">Can you tune parameters without restarting me?</h2>
-<p>Yes you can. Connect to mongodb and change the values in the collection <code>config</code>. Some of the things you can do right now are:</p>
-<ul>
-<li>Change number of tweets that I can search for each time I make API call</li>
-<li>Pause me by setting <code>pause_app: true</code>. I won&apos;t talk to twitter :smile:</li>
-<li>Change hashtags for which I can scan twitter to find content</li>
-</ul>
-<h2 id="want-to-know-a-little-more-on-how-i-work">Want to know a little more on how I work?</h2>
-<ul>
-<li>I scan for some tweets with predefined hashtags</li>
-<li>I store them in a database to do further processing. This avoids me to make too many API calls</li>
-<li>I scan for some metadata and post tweets that meet predefined criteria and save both posted tweets and discarded tweets</li>
-<li>Posted and discarded list are used to avoid spamming content. In future I will periodically clean these databases</li>
-<li><code>Poll vs Stream</code>: Currently I rely on polling</li>
-<li><code>Context analysis</code>: For now I can&apos;t handle this, but you can extend me to do that</li>
-</ul>
-<h2 id="what-hashtags-can-i-handle-for-now">What hashtags can I handle for now?</h2>
-<ul>
-<li><code>computationalfluiddynamics</code></li>
-<li><code>openfoam</code></li>
-</ul>
-<h1 id="ingredients-used">Ingredients used</h1>
-<ul>
-<li><a href="https://pypi.org/project/tweepy/" target="_blank">tweepy</a></li>
-<li><a href="https://pypi.org/project/pymongo/" target="_blank">pymongo</a></li>
-<li><a href="https://github.com/mongodb/mongo" target="_blank">mongodb</a></li>
-</ul>
-<h1 id="warning">Warning</h1>
-<p>This app uses a persistent database, which keeps growing and will consume disk space. For now you need to manually perform the cleanup and keep an eye on the space used by mongodb. I will update the code to automate such that app does this automatically while it is running.</p>
+                                <h1 id="get-developer-access">Get developer access</h1>
+<p>Create a twitter account if required from which you intend the bot to post tweets or retweet.</p>
+<p>Visit <a href="https://developer.twitter.com" target="_blank">https://developer.twitter.com</a> and complete the steps</p>
+<p><img src="img/tw_1.png" alt="1">
+<img src="img/tw_2.png" alt="1"></p>
+<p>Select appropriate option from below that suits your need
+<img src="img/tw_3.png" alt="1"></p>
+<p><img src="img/tw_4.png" alt="1"></p>
+<p>Complete the questionaire below, review, and submit the application. Twitter might contact you to verify few details or grant you developer access right away.
+<img src="img/tw_5.png" alt="1"></p>
+<p>Once approved, go to <code>Apps</code> from your account, create an app and make note of API keys (<code>API key</code>, <code>API secret key</code>) which will be required to run the bot
+<img src="img/tw_6.png" alt="1"></p>
+<p><img src="img/tw_7.png" alt="1"></p>
+<p><img src="img/tw_8.png" alt="1"></p>
+<p>For the bot to retweet, set it <code>Read and Write</code> permissions
+<img src="img/tw_9.png" alt="1">
+<img src="img/tw_10.png" alt="1"></p>
+<p>Finally generate and save <code>Access token</code> and <code>Access secret token</code></p>
+<p><img src="img/tw_11.png" alt="1">
+<img src="img/tw_12.png" alt="1"></p>
 
                                 
                                 </section>
@@ -234,8 +220,12 @@
 
             
                 
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="get_started.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Get Started">
+                
+                <a href="deploy_app.html" class="navigation navigation-next " aria-label="Next page: Deploy bot">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -246,7 +236,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Get Started","level":"1.2","depth":1,"path":"get_started.md","ref":"get_started.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"README.md","mtime":"2020-07-26T03:54:58.513Z","type":"markdown"},"gitbook":{"version":"3.5.2","time":"2020-07-26T03:55:08.794Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Get Started","level":"1.2","depth":1,"next":{"title":"Deploy bot","level":"1.3","depth":1,"path":"deploy_app.md","ref":"deploy_app.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"get_started.md","mtime":"2020-07-26T03:54:58.513Z","type":"markdown"},"gitbook":{"version":"3.5.2","time":"2020-07-26T03:55:08.794Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

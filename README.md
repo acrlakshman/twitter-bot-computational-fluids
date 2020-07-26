@@ -6,7 +6,7 @@
 
 ---
 
-### Detailed documentation
+### Documentation
 
 :point_right: https://acrlakshman.github.io/twitter-bot-computational-fluids/
 
@@ -114,6 +114,10 @@ docker stack rm cfdspace_stack
 
 - Database persists in the volume `db`
 - App logs are stored in `logs/cfdspace.log`
+
+## Docker images
+
+* [twitter_cfdspace_bot](https://hub.docker.com/repository/docker/acrlakshman/twitter_cfdspace_bot)
 
 ### Notes
 

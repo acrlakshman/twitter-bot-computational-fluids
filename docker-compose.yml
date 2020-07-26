@@ -9,8 +9,8 @@ services:
   app:
     build:
       context: ./app
-      dockerfile: Dockerfile.compose
-    image: cfdspace:latest
+      dockerfile: Dockerfile
+    image: twitter_cfdspace_bot:latest
     container_name: cfdspace_app
     restart: unless-stopped
     networks:

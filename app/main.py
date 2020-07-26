@@ -1,6 +1,5 @@
 import tweepy
 import time
-from langdetect import detect
 from datetime import datetime, timedelta
 import config
 from api_helper import APIHelper
@@ -187,8 +186,7 @@ def process_pulled_tweets(tw_api, mongo_client):
                 continue
 
             # Check the language code
-            # One could use doc.metadata["iso_language_code"] == 'en'
-            if not (detect(doc["full_text"]) == 'en'):
+            if not (doc["metadata"]["iso_language_code"] == 'en'):
                 pulled_list_coll.delete_one({"id_str": doc["id_str"]})
                 continue
 
@@ -267,7 +265,7 @@ def run(tw_api, mongo_client):
             pull_tweets(tw_api, mongo_client)
             process_pulled_tweets(tw_api, mongo_client)
 
-        time.sleep(30)
+        time.sleep(60)
 
 
 if __name__ == "__main__":

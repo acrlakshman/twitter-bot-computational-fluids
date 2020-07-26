@@ -107,7 +107,7 @@ mkdir -p logs db
 - Start containers
 
 ```sh
-docker stack deploy -c docker-stack.yml bot
+docker stack deploy -c docker-stack.yml cfdspace_stack
 ```
 
 #### Stop

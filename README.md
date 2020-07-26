@@ -115,6 +115,6 @@ docker stack rm cfdspace_stack
 - Database persists in the volume `db`
 - App logs are stored in `logs/cfdspace.log`
 
-### Warning
+### Note
 
 This app uses a persistent database, which keeps growing and will consume disk space. For now you need to manually perform the cleanup and keep an eye on the space used by mongodb. I will update the code to automate such that app does this automatically while it is running.

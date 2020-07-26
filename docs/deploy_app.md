@@ -41,6 +41,19 @@ If you need detailed installation instructions for docker installation on each o
 
 ---
 
+## Change `hashtags`
+
+Before deploying, change the default hashtags to suite your needs.
+
+`app/config.py`
+  * Add `hashtag` (excluding `#`) of your choice to `HASH_TAGS_DEFAULT = ['hashtag']`
+
+### Change `hashtags` during runtime
+
+* Connect to `mongodb` and edit the field `hash_tags` in the collection `config`
+
+---
+
 ## Deploy bot
 
 ### Using docker-compose

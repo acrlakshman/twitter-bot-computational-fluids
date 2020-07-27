@@ -29,10 +29,12 @@ Yes you can. Connect to mongodb and change the values in the collection `config`
 - `Poll vs Stream`: Currently I rely on polling
 - `Context analysis`: For now I can't handle this, but you can extend me to do that
 
-## What hashtags can I handle for now?
+## What hashtags I handle by default?
 
 - `computationalfluiddynamics`
-- `openfoam`
+- `multiphaseflows`
+- `volumeoffluid`
+- `latticeboltzmann`
 
 # Ingredients used
 

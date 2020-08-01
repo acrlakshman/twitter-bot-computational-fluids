@@ -7,11 +7,14 @@ from logging.handlers import TimedRotatingFileHandler
 
 # Variables appended with _DEFAULT are used to initialize config parameters in the database.
 HASH_TAGS_DEFAULT = ['computationalfluiddynamics', 'volumeoffluid', 'latticeboltzmann', 'multiphaseflows']
+HASH_TAGS_META_DEFAULT = {'computationalfluiddynamics': {'include_strs': [], 'exclude_strs': []}}
+HASH_TAGS_META_EXCLUDE_STR_KEY = 'exclude_strs'
 NUM_TWEETS_TO_SEARCH_DEFAULT = 50
 PULL_TWEETS_INTERVAL_DEFAULT = timedelta(minutes=5) # Currently not being used.
 PAUSE_APP_DEFAULT = False
 
 HASH_TAGS = HASH_TAGS_DEFAULT
+HASH_TAGS_META = HASH_TAGS_META_DEFAULT
 NUM_TWEETS_TO_SEARCH = NUM_TWEETS_TO_SEARCH_DEFAULT
 PULL_TWEETS_INTERVAL = PULL_TWEETS_INTERVAL_DEFAULT # Currently not being used.
 PAUSE_APP = PAUSE_APP_DEFAULT

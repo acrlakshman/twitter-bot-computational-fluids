@@ -75,13 +75,14 @@ mkdir -p logs db
 - Start containers
 
 ```sh
+docker-compose build
 docker-compose up -d
 ```
 
 #### Stop
 
 ```sh
-docker-compose down -v
+docker-compose down
 ```
 
 ### Using docker stack

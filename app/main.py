@@ -96,23 +96,39 @@ def can_call_pull_tweets(mongo_client):
         return True
 
 
-def pull_tweets(tw_api, mongo_client):
-    for hash_tag in config.HASH_TAGS:
-        if can_call_pull_tweets(mongo_client):
-            tweets = tweepy.Cursor(tw_api.search, q="#" + hash_tag,
-                                   tweet_mode="extended").items(config.NUM_TWEETS_TO_SEARCH)
-            inc_api_call_counters(
-                mongo_client, config.SEARCH_TWEETS_ID, config.SEARCH_TWEETS_LIMIT_WINDOW)
+def exclude_tweet(hash_tag, tweet):
+    """Returns True if tweet needs to be excluded."""
+    # Check for excluded strings
+    exclude = False
+    if hash_tag in config.HASH_TAGS_META:
+        if config.HASH_TAGS_META_EXCLUDE_STR_KEY in config.HASH_TAGS_META[hash_tag]:
+            for val in config.HASH_TAGS_META[hash_tag][config.HASH_TAGS_META_EXCLUDE_STR_KEY]:
+                if ('full_text' in tweet) and (val in tweet['full_text'].lower()):
+                    exclude = True
+                    break
 
-            db = mongo_client[config.MONGO_DB]
-            pulled_list_coll = db[config.MONGO_COLL_PULLED_LIST]
+    return exclude
 
-            for tweet in tweets:
-                if (not pulled_list_coll.find_one({"id_str": tweet.id_str})):
+
+def pull_tweets(tw_api, mongo_client, hash_tag):
+    if can_call_pull_tweets(mongo_client):
+        tweets = tweepy.Cursor(tw_api.search, q="#" + hash_tag,
+                               tweet_mode="extended").items(config.NUM_TWEETS_TO_SEARCH)
+        inc_api_call_counters(
+            mongo_client, config.SEARCH_TWEETS_ID, config.SEARCH_TWEETS_LIMIT_WINDOW)
+
+        db = mongo_client[config.MONGO_DB]
+        pulled_list_coll = db[config.MONGO_COLL_PULLED_LIST]
+
+        for tweet in tweets:
+            if (not pulled_list_coll.find_one({"id_str": tweet.id_str})):
+                if not exclude_tweet(hash_tag, tweet._json):
                     pulled_list_coll.insert_one(tweet._json)
 
                     add_or_update_time(
                         mongo_client, config.MONGO_COLL_TIME_STAMPS, config.MONGO_COLL_PULLED_LIST, hash_tag)
+
+        time.sleep(config.get_rand_sleep_time())
 
 
 def in_the_list(mongo_client, mongo_doc, mongo_doc_list):
@@ -227,6 +243,13 @@ def initialize(mongo_client):
         config.logger.debug("Reading config from collection")
 
         config.HASH_TAGS = doc["hash_tags"]
+
+        if not 'hash_tags_meta' in doc:
+            doc["hash_tags_meta"] = config.HASH_TAGS_META
+            coll.update_one(mongo_query, {"$set": {"hash_tags_meta": config.HASH_TAGS_META, "updatedAt": time_now}})
+        else:
+            config.HASH_TAGS_META = doc["hash_tags_meta"]
+
         config.NUM_TWEETS_TO_SEARCH = doc["num_tweets_to_search"]
         config.PULL_TWEETS_INTERVAL = timedelta(
             minutes=doc["pull_tweets_interval_in_minutes"])
@@ -240,6 +263,7 @@ def initialize(mongo_client):
         config.logger.debug("\tIs app paused? {}".format(config.PAUSE_APP))
     else:
         coll.insert_one({"idStr": config_key, "hash_tags": config.HASH_TAGS,
+                         "hash_tags_meta": config.HASH_TAGS_META,
                          "num_tweets_to_search": config.NUM_TWEETS_TO_SEARCH,
                          "pull_tweets_interval_in_minutes": int(config.PULL_TWEETS_INTERVAL.seconds / 60),
                          "pause_app": config.PAUSE_APP,
@@ -247,6 +271,7 @@ def initialize(mongo_client):
 
         config.logger.debug("Created config collection")
         config.logger.debug("\thash tags: {}".format(config.HASH_TAGS))
+        config.logger.debug("\thash tags meta: {}".format(config.HASH_TAGS_META))
         config.logger.debug("\tnum tweets to search: {}".format(
             config.NUM_TWEETS_TO_SEARCH))
         config.logger.debug("\tpull tweets interval: {}".format(
@@ -254,6 +279,11 @@ def initialize(mongo_client):
 
     for hash_tag in config.HASH_TAGS:
         config.logger.debug("\t\thash_tag: {}".format(hash_tag))
+        if hash_tag in config.HASH_TAGS_META:
+            config.logger.debug("\t\t - meta has hash_tag: {}".format(hash_tag))
+            for key in config.HASH_TAGS_META[hash_tag]:
+                config.logger.debug("\t\t --- meta hash_tag has key")
+                config.logger.debug("\t\t\t{}: {}".format(key, config.HASH_TAGS_META[hash_tag][key]))
 
 
 def run(tw_api, mongo_client):
@@ -262,10 +292,11 @@ def run(tw_api, mongo_client):
         initialize(mongo_client)
 
         if not config.PAUSE_APP:
-            pull_tweets(tw_api, mongo_client)
+            for hash_tag in config.HASH_TAGS:
+                pull_tweets(tw_api, mongo_client, hash_tag)
             process_pulled_tweets(tw_api, mongo_client)
 
-        time.sleep(60)
+        time.sleep(300)
 
 
 if __name__ == "__main__":

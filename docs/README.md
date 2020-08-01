@@ -6,7 +6,7 @@
 
 ## What do I do?
 
-I search twitter feed every few minutes for some hashtags focused on computational research and I retweet them for now.
+I search twitter feed every few minutes for some hashtags, focused on computational research and I retweet them for now.
 
 ## Can you make me do something else?
 
@@ -19,6 +19,7 @@ Yes you can. Connect to mongodb and change the values in the collection `config`
 - Change number of tweets that I can search for each time I make API call
 - Pause me by setting `pause_app: true`. I won't talk to twitter :smile:
 - Change hashtags for which I can scan twitter to find content
+- Add or remove inclusion or exclusion strings that will be scanned in the full tweet before processing
 
 ## Want to know a little more on how I work?
 

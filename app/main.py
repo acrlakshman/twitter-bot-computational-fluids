@@ -98,7 +98,7 @@ def can_call_pull_tweets(mongo_client):
 
 def exclude_tweet(hash_tag, tweet):
     """Returns True if tweet needs to be excluded."""
-    # Check for excluded strings
+    # Check for exclude strings
     exclude = False
     if hash_tag in config.HASH_TAGS_META:
         if config.HASH_TAGS_META_EXCLUDE_STR_KEY in config.HASH_TAGS_META[hash_tag]:
@@ -108,6 +108,54 @@ def exclude_tweet(hash_tag, tweet):
                     break
 
     return exclude
+
+
+def include_tweet(hash_tag, tweet):
+    """Returns True if tweet needs to be included."""
+    # Check for include strings
+    include = False
+    if hash_tag in config.HASH_TAGS_META:
+        if config.HASH_TAGS_META_INCLUDE_STR_KEY in config.HASH_TAGS_META[hash_tag]:
+            if len(config.HASH_TAGS_META[hash_tag][config.HASH_TAGS_META_INCLUDE_STR_KEY]):
+                for val in config.HASH_TAGS_META[hash_tag][config.HASH_TAGS_META_INCLUDE_STR_KEY]:
+                    if ('full_text' in tweet) and (val.lower() in tweet['full_text'].lower()):
+                        include = True
+                        break
+            else:
+                include = True
+        else:
+            include = True
+
+    return include
+
+
+def tweet_is_a_reply(hash_tag, tweet):
+    """Returns True if tweet is a reply."""
+    if tweet['in_reply_to_status_id'] is not None:
+        return True
+    else:
+        return False
+
+
+def tweet_is_from_excluded_user(hash_tag, tweet):
+    """Returns True if tweet is from excluded user."""
+    from_excluded_user = False
+
+    if hash_tag in config.HASH_TAGS_META:
+        if config.HASH_TAGS_META_EXCLUDE_USERS_KEY in config.HASH_TAGS_META[hash_tag]:
+            for val in config.HASH_TAGS_META[hash_tag][config.HASH_TAGS_META_EXCLUDE_USERS_KEY]:
+                if (val.lower() in tweet['user']['screen_name'].lower()):
+                    from_excluded_user = True
+                    break
+
+    return from_excluded_user
+
+
+def include_tweet_to_process(hash_tag, tweet):
+    return ((not exclude_tweet(hash_tag, tweet._json)) and
+            include_tweet(hash_tag, tweet._json) and
+            (not tweet_is_a_reply(hash_tag, tweet._json)) and
+            (not tweet_is_from_excluded_user(hash_tag, tweet._json)))
 
 
 def pull_tweets(tw_api, mongo_client, hash_tag):
@@ -122,7 +170,7 @@ def pull_tweets(tw_api, mongo_client, hash_tag):
 
         for tweet in tweets:
             if (not pulled_list_coll.find_one({"id_str": tweet.id_str})):
-                if not exclude_tweet(hash_tag, tweet._json):
+                if include_tweet_to_process(hash_tag, tweet):
                     pulled_list_coll.insert_one(tweet._json)
 
                     add_or_update_time(

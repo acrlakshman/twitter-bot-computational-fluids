@@ -28,6 +28,7 @@ Yes you can. Connect to mongodb and change the values in the collection `config`
 - Pause me by setting `pause_app: true`. I won't talk to twitter :smile:
 - Change hashtags for which I can scan twitter to find content
 - Add or remove inclusion or exclusion strings that will be scanned in the full tweet before processing
+- Add or remove users whose tweets won't be retweeted
 
 ## Want to know a little more on how I work?
 

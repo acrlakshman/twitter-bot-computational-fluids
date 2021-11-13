@@ -8,13 +8,13 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v2.3.1
+    - uses: actions/checkout@v2.4.0
 
     - name: Use node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2.0.0
+      uses: actions/setup-node@v2.4.1
       with:
         node-version: ${{ matrix.node-version }}
 
@@ -24,8 +24,7 @@ jobs:
         npm run build
     
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@3.5.8
+      uses: JamesIves/github-pages-deploy-action@4.1.5
       with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: _book
+          branch: gh-pages
+          folder: _book

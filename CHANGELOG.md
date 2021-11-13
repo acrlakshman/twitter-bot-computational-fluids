@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.9.4] - 2021-11-13
+
+### Changed
+
+- Upgraded tweepy, pymongo.
+
+### Fixed
+
+- API call fixes.
+
 ## [0.9.3] - 2020-08-29
 
 ### Added

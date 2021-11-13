@@ -11,7 +11,7 @@ HASH_TAGS_META_DEFAULT = {'computationalfluiddynamics': {'include_strs': [], 'ex
 HASH_TAGS_META_INCLUDE_STR_KEY = 'include_strs'
 HASH_TAGS_META_EXCLUDE_STR_KEY = 'exclude_strs'
 HASH_TAGS_META_EXCLUDE_USERS_KEY = 'exclude_users'
-NUM_TWEETS_TO_SEARCH_DEFAULT = 50
+NUM_TWEETS_TO_SEARCH_DEFAULT = 10
 PULL_TWEETS_INTERVAL_DEFAULT = timedelta(minutes=5) # Currently not being used.
 PAUSE_APP_DEFAULT = False
 
@@ -70,4 +70,4 @@ logger.propagate = False
 
 
 def get_rand_sleep_time():
-    return random.randint(2, 15)
+    return random.randint(60, 180)

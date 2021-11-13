@@ -160,7 +160,7 @@ def include_tweet_to_process(hash_tag, tweet):
 
 def pull_tweets(tw_api, mongo_client, hash_tag):
     if can_call_pull_tweets(mongo_client):
-        tweets = tweepy.Cursor(tw_api.search, q="#" + hash_tag,
+        tweets = tweepy.Cursor(tw_api.search_tweets, q="#" + hash_tag,
                                tweet_mode="extended").items(config.NUM_TWEETS_TO_SEARCH)
         inc_api_call_counters(
             mongo_client, config.SEARCH_TWEETS_ID, config.SEARCH_TWEETS_LIMIT_WINDOW)

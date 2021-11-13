@@ -21,8 +21,7 @@ class APIHelper:
             config.TWITTER_API_KEY, config.TWITTER_API_KEY_SECRET)
         auth.set_access_token(config.TWITTER_ACCESS_TOKEN,
                               config.TWITTER_ACCESS_TOKEN_SECRET)
-        tw_api = tweepy.API(auth, wait_on_rate_limit=True,
-                            wait_on_rate_limit_notify=True)
+        tw_api = tweepy.API(auth, wait_on_rate_limit=True)
 
         try:
             tw_api.verify_credentials()

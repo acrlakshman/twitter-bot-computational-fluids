@@ -103,7 +103,7 @@ def exclude_tweet(hash_tag, tweet):
     if hash_tag in config.HASH_TAGS_META:
         if config.HASH_TAGS_META_EXCLUDE_STR_KEY in config.HASH_TAGS_META[hash_tag]:
             for val in config.HASH_TAGS_META[hash_tag][config.HASH_TAGS_META_EXCLUDE_STR_KEY]:
-                if ('full_text' in tweet) and (val in tweet['full_text'].lower()):
+                if val and tweet['full_text'] and ('full_text' in tweet) and (val.lower() in tweet['full_text'].lower()):
                     exclude = True
                     break
 
@@ -118,13 +118,15 @@ def include_tweet(hash_tag, tweet):
         if config.HASH_TAGS_META_INCLUDE_STR_KEY in config.HASH_TAGS_META[hash_tag]:
             if len(config.HASH_TAGS_META[hash_tag][config.HASH_TAGS_META_INCLUDE_STR_KEY]):
                 for val in config.HASH_TAGS_META[hash_tag][config.HASH_TAGS_META_INCLUDE_STR_KEY]:
-                    if ('full_text' in tweet) and (val.lower() in tweet['full_text'].lower()):
+                    if val and tweet['full_text'] and ('full_text' in tweet) and (val.lower() in tweet['full_text'].lower()):
                         include = True
                         break
             else:
                 include = True
         else:
             include = True
+    else:
+        include = True
 
     return include
 
@@ -144,7 +146,7 @@ def tweet_is_from_excluded_user(hash_tag, tweet):
     if hash_tag in config.HASH_TAGS_META:
         if config.HASH_TAGS_META_EXCLUDE_USERS_KEY in config.HASH_TAGS_META[hash_tag]:
             for val in config.HASH_TAGS_META[hash_tag][config.HASH_TAGS_META_EXCLUDE_USERS_KEY]:
-                if (val.lower() in tweet['user']['screen_name'].lower()):
+                if val and (val.lower() in tweet['user']['screen_name'].lower()):
                     from_excluded_user = True
                     break
 
@@ -175,8 +177,6 @@ def pull_tweets(tw_api, mongo_client, hash_tag):
 
                     add_or_update_time(
                         mongo_client, config.MONGO_COLL_TIME_STAMPS, config.MONGO_COLL_PULLED_LIST, hash_tag)
-
-        time.sleep(config.get_rand_sleep_time())
 
 
 def in_the_list(mongo_client, mongo_doc, mongo_doc_list):
@@ -342,9 +342,11 @@ def run(tw_api, mongo_client):
         if not config.PAUSE_APP:
             for hash_tag in config.HASH_TAGS:
                 pull_tweets(tw_api, mongo_client, hash_tag)
+                time.sleep(config.get_rand_sleep_time())
+
             process_pulled_tweets(tw_api, mongo_client)
 
-        time.sleep(300)
+        time.sleep(900)
 
 
 if __name__ == "__main__":

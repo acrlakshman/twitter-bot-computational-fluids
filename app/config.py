@@ -70,4 +70,4 @@ logger.propagate = False
 
 
 def get_rand_sleep_time():
-    return random.randint(60, 180)
+    return random.randint(2, 15)

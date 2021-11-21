@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.9.5] - 2021-11-21
+
+### Fixed
+
+- Bug fixes with empty strings while processing tweets.
+
 ## [0.9.4] - 2021-11-13
 
 ### Changed
@@ -32,6 +38,7 @@
 
 - [README] and [documentation] are updated with new `hash_tags_meta` details
 
+[0.9.5]: https://github.com/acrlakshman/twitter-bot-computational-fluids/compare/v0.9.4...v0.9.5
 [0.9.4]: https://github.com/acrlakshman/twitter-bot-computational-fluids/compare/v0.9.3...v0.9.4
 [0.9.3]: https://github.com/acrlakshman/twitter-bot-computational-fluids/compare/v0.9.2...v0.9.3
 [0.9.2]: https://github.com/acrlakshman/twitter-bot-computational-fluids/compare/v0.9.1...v0.9.2

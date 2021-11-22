@@ -266,11 +266,12 @@ def process_pulled_tweets(tw_api, mongo_client):
                     mongo_client, config.TWEET_RETWEET_ID, config.TWEET_RETWEET_LIMIT_WINDOW)
                 posted_list_coll.insert_one(doc)
                 pulled_list_coll.delete_one({"id_str": doc["id_str"]})
-            except tweepy.TweepError as e:
-                config.logger.error(
-                    "During retweet for ID: {}; message: {}".format(doc["id_str"], e.args[0][0]['message']))
+            except tweepy.TweepyException as e:
                 discard_list_coll.insert_one(doc)
                 pulled_list_coll.delete_one({"id_str": doc["id_str"]})
+                # FIXME: Below indexing is not right.
+                #config.logger.error(
+                #    "During retweet for ID: {}; message: {}".format(doc["id_str"], e.args[0][0]['message']))
 
         retweet_delay_time = config.get_rand_sleep_time()
         config.logger.info(
